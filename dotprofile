@@ -1,6 +1,4 @@
-export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:$HOME/bin:$HOME/.local/bin:$PATH
-# added by Anaconda3 4.1.1 installer
-export PATH="/Users/jon/anaconda/bin:$PATH"
+export PATH=$HOME/anaconda/bin:$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:$HOME/bin:$HOME/.local/bin:$PATH
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -19,6 +17,12 @@ VISUAL="vim"
 
 umask 0077
 
-source ~/.alias
-source ~/conf/private/homebrew
-
+if [ ! -f ~/.alias ]; then
+    source ~/.alias
+fi
+if [ ! -f ~/conf/private/homebrew ]; then
+    source ~/conf/private/homebrew
+fi
+if [ ! -f ~/.localprofile ]; then
+    source ~/.localprofile
+fi
