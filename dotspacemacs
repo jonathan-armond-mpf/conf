@@ -317,10 +317,14 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'exec-path "~/.local/bin")
   (setup-mac-meta-keys)
-  ;(setq-default dotspacemacs-configuration-layers
-  ;              '((haskell :variables haskell-process-type 'stack-ghci))
-  ;              haskell-process-path-ghci "stack"
-  ;              haskell-process-args-stack-ghci '("ghci --ghci-options=-ferror-spans"))
+
+  ;; Org file quick shortcuts
+  (global-set-key (kbd "<f5>") (lambda ()
+                                 (interactive)
+                                 (find-file "~/org/tasks.org")))
+  (global-set-key (kbd "<f6>") (lambda ()
+                                 (interactive)
+                                 (find-file "~/org/profile.org")))
   )
 
 (defun setup-mac-meta-keys ()
