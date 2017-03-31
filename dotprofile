@@ -17,12 +17,6 @@ VISUAL="vim"
 
 umask 0077
 
-if [ ! -f ~/.alias ]; then
-    source ~/.alias
-fi
-if [ ! -f ~/conf/private/homebrew ]; then
-    source ~/conf/private/homebrew
-fi
-if [ ! -f ~/.localprofile ]; then
-    source ~/.localprofile
-fi
+[ -f ~/.alias ] && source ~/.alias
+[ -f ~/conf/private/homebrew ] && source ~/conf/private/homebrew
+[ -f ~/.localprofile ] && source ~/.localprofile
