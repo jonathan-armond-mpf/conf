@@ -262,8 +262,18 @@ values."
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
-   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
-   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; Control line numbers activation.
+   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
+   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
    ;; (default nil)
    dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
@@ -318,6 +328,16 @@ you should place your code here."
   (add-to-list 'exec-path "~/.local/bin")
   (setup-mac-meta-keys)
 
+  ;; Don't split long lines
+  (spacemacs/toggle-truncate-lines-on)
+  (add-hook 'text-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+  (add-hook 'LaTeX-mode-hook 'spacemacs/toggle-visual-line-navigation-on)
+  (add-hook 'text-mode-hook 'spacemacs/toggle-auto-fill-mode-off)
+  (add-hook 'LaTeX-mode-hook 'spacemacs/toggle-auto-fill-mode-off)
+  (global-visual-line-mode t)
+  (evil-define-minor-mode-key 'motion 'visual-line-mode "j" 'evil-next-visual-line)
+  (evil-define-minor-mode-key 'motion 'visual-line-mode "k" 'evil-previous-visual-line)
+
   ;; Org file quick shortcuts
   (global-set-key (kbd "<f5>") (lambda ()
                                  (interactive)
@@ -328,27 +348,23 @@ you should place your code here."
   )
 
 (defun setup-mac-meta-keys ()
-  (spacemacs/toggle-maximize-frame-on)
-  (let ((m window-numbering-keymap))
-    ;; On UK MBP keyboards, META key is used to insert certain characters clear the key
-    (define-key m "\M-0" nil)
-    (define-key m "\M-1" nil)
-    (define-key m "\M-2" nil)
-    (define-key m "\M-3" nil)
-    (define-key m "\M-4" nil)
-    (define-key m "\M-5" nil)
-    (define-key m "\M-6" nil)
-    (define-key m "\M-7" nil)
-    (define-key m "\M-8" nil)
-    (define-key m "\M-9" nil)
+  (let ((m winum-keymap))
+  ;; On UK MBP keyboards, META key is used to insert certain characters clear the key
+  ;; Change to CMD key for window switching.
+    (dotimes (n 10 nil)
+      (let* ((w (number-to-string n))
+             (meta (kbd (concat "M-" w)))
+             (cmd (kbd (concat "s-" w)))
+             (fn (lookup-key m meta)))
+	(define-key m meta nil)
+	(define-key m cmd fn))))
 
-    ;; http://stackoverflow.com/questions/3977069/emacs-question-hash-key
-    (global-set-key (kbd "M-2") '(lambda () (interactive) (insert "€")))
-    (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
-    (define-key isearch-mode-map (kbd "M-3")
-      '(lambda ()
-         (interactive)
-         (isearch-process-search-char ?\#)))))
+  (global-set-key (kbd "M-2") '(lambda () (interactive) (insert "€")))
+  (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+  (define-key isearch-mode-map (kbd "M-3")
+    '(lambda ()
+       (interactive)
+       (isearch-process-search-char ?\#))))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -369,7 +385,7 @@ you should place your code here."
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (org-projectile org-present org-pomodoro org-download htmlize gnuplot zenburn-theme hc-zenburn-theme mu4e-maildirs-extension mu4e-alert ht alert log4e gntp auctex-latexmk x86-lookup nasm-mode slime-company slime common-lisp-snippets mmm-mode markdown-toc markdown-mode gh-md mwim evil-commentary yaml-mode yapfify wolfram-mode web-mode thrift tagedit stan-mode slim-mode scss-mode scad-mode sass-mode reveal-in-osx-finder qml-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements pbcopy osx-trash osx-dictionary matlab-mode live-py-mode less-css-mode launchctl julia-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode disaster cython-mode csv-mode company-web web-completion-data company-c-headers company-auctex company-anaconda cmake-mode clang-format auctex arduino-mode anaconda-mode pythonic web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color xkcd spotify smeargle shell-pop orgit org multi-term magit-gitflow intero flycheck hlint-refactor hindent helm-spotify multi helm-hoogle helm-gitignore helm-company helm-c-yasnippet haskell-snippets gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help company-statistics company-ghci company-ghc ghc haskell-mode company-cabal company cmm-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+    (winum unfill fuzzy org-projectile org-present org-pomodoro org-download htmlize gnuplot zenburn-theme hc-zenburn-theme mu4e-maildirs-extension mu4e-alert ht alert log4e gntp auctex-latexmk x86-lookup nasm-mode slime-company slime common-lisp-snippets mmm-mode markdown-toc markdown-mode gh-md mwim evil-commentary yaml-mode yapfify wolfram-mode web-mode thrift tagedit stan-mode slim-mode scss-mode scad-mode sass-mode reveal-in-osx-finder qml-mode pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements pbcopy osx-trash osx-dictionary matlab-mode live-py-mode less-css-mode launchctl julia-mode hy-mode helm-pydoc helm-css-scss haml-mode emmet-mode disaster cython-mode csv-mode company-web web-completion-data company-c-headers company-auctex company-anaconda cmake-mode clang-format auctex arduino-mode anaconda-mode pythonic web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color xkcd spotify smeargle shell-pop orgit org multi-term magit-gitflow intero flycheck hlint-refactor hindent helm-spotify multi helm-hoogle helm-gitignore helm-company helm-c-yasnippet haskell-snippets gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help company-statistics company-ghci company-ghc ghc haskell-mode company-cabal company cmm-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
@@ -398,4 +414,4 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:foreground "#DCDCCC" :background "#313131")))))
