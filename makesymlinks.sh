@@ -10,7 +10,9 @@ for i in $dotfiles
 do
     f=`basename $i`
     fdot=${f:3}
-    ln -Ffsv $confdir/$f $targetdir/.$fdot
+    echo $fdot
+    echo $f
+    ln -fsnv $confdir/$f $targetdir/.$fdot
 done
 
 # List of files/dirs to symlink without name changes
