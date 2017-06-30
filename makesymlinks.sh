@@ -5,7 +5,7 @@ confdir=~/conf
 targetdir=~
 
 # List of files/dirs to symlink with a dot prefix
-dotfiles=`ls $confdir/dot*`
+dotfiles=`ls -d $confdir/dot*`
 for i in $dotfiles
 do
     f=`basename $i`
