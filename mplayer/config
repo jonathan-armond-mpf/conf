@@ -1,3 +1,12 @@
-# Write your default config options here!
+sub-fuzziness=1
+font=/Library/Fonts/Verdana.ttf
+#unicode=yes
+utf8=yes
+#subcp=ISO-8859-7
+#subfont-encoding=ISO-8859-7
+#subfont-encoding=unicode
+subfont-text-scale=4.0
+
+cache=16384
 
 
