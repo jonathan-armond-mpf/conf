@@ -1,0 +1,21 @@
+[submodule "dotvim/bundle/command-t"]
+	path = dotvim/bundle/command-t
+	url = git@github.com:wincent/command-t
+[submodule "dotvim/bundle/nerdcommenter"]
+	path = dotvim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter
+[submodule "dotvim/bundle/lightline"]
+	path = dotvim/bundle/lightline
+	url = https://github.com/itchyny/lightline.vim
+[submodule "dotvim/bundle/supertab"]
+	path = dotvim/bundle/supertab
+	url = https://github.com/ervandew/supertab
+[submodule "dotvim/bundle/fugitive"]
+	path = dotvim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "dotvim/bundle/surround"]
+	path = dotvim/bundle/surround
+	url = https://github.com/tpope/vim-surround
+[submodule "dotvim/bundle/rainbow"]
+	path = dotvim/bundle/rainbow
+	url = https://github.com/luochen1990/rainbow

@@ -1,49 +1,118 @@
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Vim Config for JWA
+" Forget vi compatability.
 set nocompatible
 
-set backup
-set autoindent
-set ruler
-set showcmd
-set expandtab
-set tabstop=4
-set shiftwidth=4
+" Plugin management.
+execute pathogen#infect()
 
-" In many terminal emulators the mouse works just fine, thus enable it.
+" Syntax highlighting.
+syntax on
+filetype plugin indent on
+colorscheme Tomorrow-Night
+
+" Set font.
+set guifont=Menlo\ Regular:h12
+
+
+" Enable mouse
 if has('mouse')
   set mouse=a
 endif
 
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+" Leader key. Prefixes commands.
+let mapleader=","
 
-filetype plugin indent on
+" Shortcuts.
+" Reload .vimrc
+map <leader>ev :e $MYVIMRC<CR>
+" Reload .vimrc
+map <leader>es :source ~/.vimrc<CR>
+" Reload previous file.
+map <leader><leader> :e#<CR>
+" Reindex files.
+noremap <Leader>r :CommandTFlush<CR>
+" Strip whitespace.
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" Open a scratch file.
+map <leader><tab> :Scratch<CR>
 
-" For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
+" More history.
+set hidden
+set history=100
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
+" Indenting.
+filetype indent on
+set nowrap
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set smartindent
+set autoindent
 
-" Disable bells
-set noeb vb t_vb=
+" Misc options.
+set encoding=utf-8 " Encoding
+set showmode       " Show current mode
+set showcmd        " Show partially complete command
+set wildmenu       " Show command completions
+set visualbell
+set cursorline     " Highlight line cursor is on
+set ttyfast        " Configure for fast terminals
+set ruler          " Show line and column number
+set backspace=indent,eol,start " Allow backspacing over these items
+set laststatus=2   " Always have a status line
+set number         " Show line numbers
+set relativenumber " Show line numbers relative to current line
+set noundofile     " Save undo history
+set modelines=0    " Ignore modelines in files.
 
-" Color scheme
-colorscheme koehler
+" Remove whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
 
-" GUI font
-set guifont=Source\ Code\ Pro\ 9
+" Searching.
+" Cancel search with <leader>space
+nnoremap <silent> <leader><space> :noh<cr>
+" Use Perl regexes.
+nnoremap / /\v
+vnoremap / /\v
+" Case-sensitive only when uppercase chars used.
+set ignorecase
+set smartcase
+" Default to substitutions across whole lines.
+set gdefault
+" Highlight incremental search
+set hlsearch
+set incsearch
+set showmatch
 
-" Show tabs and trailing whitespace
-set listchars=tab:>-,trail:-
+" Parentheses.
+set showmatch
+" Use tab to jump around parentheses.
+nnoremap <tab> %
+vnoremap <tab> %
+let g:rainbow_active = 1
 
-" Clear search command
-command C let @/=""
+" Long line handing.
+set wrap
+set textwidth=80
+set formatoptions=qrn1
+set colorcolumn=85 " Mark far right column.
+
+
+" Disable cursors
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+" Make movement by screen line instead of file line.
+nnoremap j gj
+nnoremap k gk
+" Disable help key
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+

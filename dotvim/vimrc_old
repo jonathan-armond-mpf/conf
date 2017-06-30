@@ -1,0 +1,49 @@
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+set backup
+set autoindent
+set ruler
+set showcmd
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+filetype plugin indent on
+
+" For all text files set 'textwidth' to 78 characters.
+autocmd FileType text setlocal textwidth=78
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+
+" Disable bells
+set noeb vb t_vb=
+
+" Color scheme
+colorscheme koehler
+
+" GUI font
+set guifont=Source\ Code\ Pro\ 9
+
+" Show tabs and trailing whitespace
+set listchars=tab:>-,trail:-
+
+" Clear search command
+command C let @/=""
