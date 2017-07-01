@@ -1,3 +1,7 @@
 *~
 private
 .netrwhist
+
+dotemacs.d/*
+!init.el
+!dotemacs.d/lisp
