@@ -20,13 +20,23 @@
 
 ;; Color scheme
 (load-theme 'wombat t)
-;;; Smart-mode-line
-;(sml/setup)
-;(setq rm-blacklist (list " MRev"))
-(use-package powerline
+
+;; Smart-mode-line
+(use-package smart-mode-line
   :ensure t
   :config
-  (powerline-center-evil-theme))
+  (sml/setup)
+  (setq sml/shorten-modes t)
+
+  (use-package rich-minority
+    :ensure t
+    :config
+    (add-to-list 'rm-blacklist (list " company" " yas" " Helm" " Undo-Tree"))
+    (rich-minority-mode 1)))
+;; (use-package powerline
+;;   :ensure t
+;;   :config
+;;   (powerline-center-evil-theme))
 
 ;;; Modeline
 ;; (line-number-mode t)                   ; Show line numbers

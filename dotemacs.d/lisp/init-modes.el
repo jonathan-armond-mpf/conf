@@ -96,3 +96,7 @@
 (setq tags-revert-without-query t)
 (global-set-key (kbd "<S-f3>") 'ctags-create-or-update-tags-table)
 
+;;; Markdown
+(use-package markdown-mode
+  :config
+  (add-hook 'markdown-mode-hook (lambda () (visual-line-mode 1))))

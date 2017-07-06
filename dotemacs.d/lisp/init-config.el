@@ -1,6 +1,7 @@
 ;;; General settings.
 
 (use-package exec-path-from-shell
+  :ensure t
   :config
   (exec-path-from-shell-initialize)) ; Set env vars from shell
 
@@ -102,8 +103,8 @@ When using Homebrew, install it using \"brew install trash\"."
 
 ;; Spelling
 (add-hook 'text-mode-hook (lambda () (flyspell-mode 1)))
-(setq-default ispell-program-name "aspell")
-(ispell-change-dictionary "en_GB-ize" t)
+(setq ispell-program-name "/usr/local/bin/aspell")
+(setq ispell-dictionary "english")
 
 
 ;;; Evil mode
@@ -111,6 +112,13 @@ When using Homebrew, install it using \"brew install trash\"."
   :ensure t
   :config
   (evil-mode 1)
+  ;; Make movement keys work in visual lines mode.
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  ;; Make horizontal movement cross lines.
+  (setq-default evil-cross-lines t)
 
   (use-package evil-surround
     :ensure t
@@ -147,6 +155,7 @@ When using Homebrew, install it using \"brew install trash\"."
   (global-set-key (kbd "M-x") #'helm-M-x)
   (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
   (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (global-set-key (kbd "C-x C-r") #'helm-recentf)
   (helm-mode 1))
 
 ;; Flycheck
@@ -173,3 +182,17 @@ When using Homebrew, install it using \"brew install trash\"."
   :config
   (nlinum-relative-setup-evil)
   (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
+;; Recent files
+(recentf-mode 1)
+(setq-default recent-save-file "~/.emacs.d/recentf")
+
+;; Very large files
+(use-package vlf
+  :ensure t
+  :config
+  (require 'vlf-setup))
+
+;; Magit
+(use-package magit
+  :ensure t)
