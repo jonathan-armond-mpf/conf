@@ -9,11 +9,8 @@ export BOWTIE_INDEXES="$HOME/sync/work/projects/locilabel/genomedb"
 export GL_ENABLE_DEBUG_ATTACH=YES
 export PS1='\u@\h \w$ '
 
-EDITOR="vim"
-VISUAL="vim"
-
-#alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
-#alias emacsclient='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
+EDITOR="emacsclient -t"
+VISUAL=$EDITOR
 
 umask 0077
 

@@ -1,2 +1,5 @@
 alias rm=trash
 alias ls=gls
+alias emacs="emacsclient -t"
+alias emacsc="emacsclient -c"
+alias emacsd="/usr/local/bin/emacs --debug-init"
