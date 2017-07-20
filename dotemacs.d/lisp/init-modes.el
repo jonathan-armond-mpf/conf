@@ -90,6 +90,10 @@
 
 ;;; Python
 (setq python-shell-interpreter "/usr/local/bin/python3")
+(use-package conda
+  :ensure t
+  :config
+  (conda-env-autoactivate-mode))
 
 ;;; Ctags
 (setq ctags-command "/opt/local/bin/ctags -e -R ")
@@ -98,5 +102,6 @@
 
 ;;; Markdown
 (use-package markdown-mode
+  :ensure t
   :config
   (add-hook 'markdown-mode-hook (lambda () (visual-line-mode 1))))
