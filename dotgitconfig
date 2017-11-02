@@ -1,10 +1,5 @@
 [user]
 	name = Jonathan Armond
-	email = jon.armond@gmail.com
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+	email = jonathan.armond@groupm.com
 [merge]
   ff = only # Only allow fast-forward merges.
