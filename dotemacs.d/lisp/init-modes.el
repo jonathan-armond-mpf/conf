@@ -105,3 +105,7 @@
   :ensure t
   :config
   (add-hook 'markdown-mode-hook (lambda () (visual-line-mode 1))))
+
+;;; Emacs-Speaks-Statistics
+(use-package ess-site
+  :ensure ess)
