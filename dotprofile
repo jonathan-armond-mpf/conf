@@ -17,3 +17,6 @@ umask 0077
 [ -f ~/.alias ] && source ~/.alias
 [ -f ~/conf/private/homebrew ] && source ~/conf/private/homebrew
 [ -f ~/.localprofile ] && source ~/.localprofile
+
+# added by Anaconda3 5.0.1 installer
+export PATH="/Users/jonathan.armondgroupm.com/anaconda3/bin:$PATH"
