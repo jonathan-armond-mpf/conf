@@ -195,3 +195,10 @@ When using Homebrew, install it using \"brew install trash\"."
 ;; Magit
 (use-package magit
   :ensure t)
+
+;; Fill column
+(use-package fill-column-indicator
+  :ensure t)
+
+(provide 'init-config)
+;;; init-config.el ends here
