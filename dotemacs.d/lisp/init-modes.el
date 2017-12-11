@@ -1,11 +1,5 @@
 ;;; Modes
 
-;; Show white space
-(add-hook 'prog-mode-hook
-          (lambda () (setq show-trailing-whitespace t)))
-(add-hook 'matlab-mode-hook
-          (lambda () (setq show-trailing-whitespace t)))
-
 ;; C style
 (require 'cc-mode)
 (setq c-default-style '((java-mode . "java")
@@ -91,9 +85,7 @@
 ;;; Python
 (setq python-shell-interpreter "/usr/local/bin/python3")
 (use-package conda
-  :ensure t
-  :config
-  (conda-env-autoactivate-mode))
+  :ensure t)
 
 ;;; Ctags
 (setq ctags-command "/opt/local/bin/ctags -e -R ")
@@ -108,4 +100,21 @@
 
 ;;; Emacs-Speaks-Statistics
 (use-package ess-site
-  :ensure ess)
+  :ensure ess
+  :config
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (setq show-trailing-whitespace t)
+              (ess-set-style 'RStudio 'quiet)
+              (linum-mode 1)
+              (show-paren-mode)))
+              ;(add-hook 'local-write-file-hooks
+              ;          (lambda () (ess-nuke-trailing-whitespace)))))
+  (setq ess-nuke-trailing-whitespace-p nil))
+
+;;; Show white space
+(add-hook 'prog-mode-hook
+          (lambda () (setq show-trailing-whitespace t)))
+(add-hook 'matlab-mode-hook
+          (lambda () (setq show-trailing-whitespace t)))
+
