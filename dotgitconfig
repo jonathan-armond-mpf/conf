@@ -7,4 +7,6 @@
 	process = git-lfs filter-process
 	required = true
 [merge]
-  ff = only # Only allow fast-forward merges.
+#  ff = only # Only allow fast-forward merges.
+[core]
+#	autocrlf = input
