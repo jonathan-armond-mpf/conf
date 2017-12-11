@@ -1,16 +1,20 @@
-export PATH=$HOME/anaconda/bin:$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:$HOME/bin:$HOME/.local/bin:$PATH
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:$PKG_CONFIG_PATH
 
 export MAILDIR=$HOME/.mail
-export BOWTIE_INDEXES="$HOME/sync/work/projects/locilabel/genomedb"
 
-# For OpenGL profiler
-export GL_ENABLE_DEBUG_ATTACH=YES
-export PS1='\u@\h \w$ '
+# R
+export R_ENABLE_JIT=3
+# For ACP_APP.
+#export RJDBC_CLASSPATH=$HOME/mdatascience/connections:$HOME/mdatascience/connections/hive
 
-EDITOR="emacsclient -t"
-VISUAL=$EDITOR
+
+#export EDITOR="emacsclient -t"
+export EDITOR=vim
+export VISUAL=$EDITOR
+
+export PS1="\h:\W$ "
 
 umask 0077
 
@@ -18,5 +22,4 @@ umask 0077
 [ -f ~/conf/private/homebrew ] && source ~/conf/private/homebrew
 [ -f ~/.localprofile ] && source ~/.localprofile
 
-# added by Anaconda3 5.0.1 installer
-export PATH="/Users/jonathan.armondgroupm.com/anaconda3/bin:$PATH"
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
