@@ -27,23 +27,4 @@
   :config
   (sml/setup)
   (setq sml/shorten-modes t)
-
-  (use-package rich-minority
-    :ensure t
-    :config
-    (add-to-list 'rm-blacklist (list " company" " yas" " Helm" " Undo-Tree"))
-    (rich-minority-mode 1)))
-;; (use-package powerline
-;;   :ensure t
-;;   :config
-;;   (powerline-center-evil-theme))
-
-;;; Modeline
-;; (line-number-mode t)                   ; Show line numbers
-;; (column-number-mode t)                 ; Show column numbers
-;; (setq display-time-day-and-date t
-;;       display-time-24hr-format t
-;;       display-time-default-load-average nil)
-;; (display-time)
-;; (display-battery-mode)
-
+  (add-to-list 'rm-blacklist (list " company" " yas" " Helm" " Undo-Tree")))
