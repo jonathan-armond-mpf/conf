@@ -50,7 +50,6 @@ When using Homebrew, install it using \"brew install trash\"."
 
 ;; Basic text editing parameters
 (setq default-major-mode 'text-mode)
-(add-hook 'text-mode-hook 'longlines-mode)
 (setq-default fill-column 80)
 (setq-default default-tab-width 4)
 (setq-default indent-tabs-mode nil)    ; No tabs

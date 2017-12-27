@@ -90,10 +90,10 @@
 
 ;;; Python
 (setq python-shell-interpreter "/usr/local/bin/python3")
-(use-package conda
-  :ensure t
-  :config
-  (conda-env-autoactivate-mode))
+;; (use-package conda
+  ;; :ensure t
+  ;; :config
+  ;; (conda-env-autoactivate-mode))
 
 ;;; Ctags
 (setq ctags-command "/opt/local/bin/ctags -e -R ")
