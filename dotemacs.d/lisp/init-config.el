@@ -50,10 +50,12 @@ When using Homebrew, install it using \"brew install trash\"."
 
 ;; Basic text editing parameters
 (setq default-major-mode 'text-mode)
+(add-hook 'text-mode-hook 'visual-line-mode)
 (setq-default fill-column 80)
 (setq-default default-tab-width 4)
 (setq-default indent-tabs-mode nil)    ; No tabs
 (setq require-final-newline t)
+(electric-pair-mode) ; Automatic pairing of parentheses
 
 (setq diff-switches "-u") ; unified diffs
 (global-auto-revert-mode 1) ; automatically revert file if changed on disk

@@ -6,7 +6,6 @@ export MAILDIR=$HOME/.mail
 
 # R
 export R_ENABLE_JIT=3
-
 #export EDITOR="emacsclient -t"
 export EDITOR=vim
 export VISUAL=$EDITOR

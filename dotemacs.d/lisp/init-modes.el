@@ -1,11 +1,5 @@
 ;;; Modes
 
-;; Show white space
-(add-hook 'prog-mode-hook
-          (lambda () (setq show-trailing-whitespace t)))
-(add-hook 'matlab-mode-hook
-          (lambda () (setq show-trailing-whitespace t)))
-
 ;; C style
 (require 'cc-mode)
 (setq c-default-style '((java-mode . "java")
@@ -108,4 +102,25 @@
 
 ;;; Emacs-Speaks-Statistics
 (use-package ess-site
+<<<<<<< HEAD
   :ensure ess)
+=======
+  :ensure ess
+  :config
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (setq show-trailing-whitespace t)
+              (ess-set-style 'RStudio 'quiet)
+              (linum-mode 1)
+              (show-paren-mode)))
+              ;(add-hook 'local-write-file-hooks
+              ;          (lambda () (ess-nuke-trailing-whitespace)))))
+  (setq ess-nuke-trailing-whitespace-p nil))
+
+;;; Show white space
+(add-hook 'prog-mode-hook
+          (lambda () (setq show-trailing-whitespace t)))
+(add-hook 'matlab-mode-hook
+          (lambda () (setq show-trailing-whitespace t)))
+
+>>>>>>> c284022cafd7114cbe556df719564bb15cc37f81
