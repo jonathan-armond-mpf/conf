@@ -1,4 +1,4 @@
-export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:/usr/texbin:$HOME/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/.local/bin:$PATH
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:$PKG_CONFIG_PATH
 
@@ -6,9 +6,6 @@ export MAILDIR=$HOME/.mail
 
 # R
 export R_ENABLE_JIT=3
-# For ACP_APP.
-#export RJDBC_CLASSPATH=$HOME/mdatascience/connections:$HOME/mdatascience/connections/hive
-
 
 #export EDITOR="emacsclient -t"
 export EDITOR=vim
