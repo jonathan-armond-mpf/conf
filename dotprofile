@@ -1,4 +1,9 @@
-export PATH=$HOME/Library/Haskell/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/.local/bin:$PATH
+# Python2
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+# Haskell
+export PATH=$HOME/Library/Haskell/bin:$PATH
+# Homebrew
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/.local/bin:$PATH
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:$PKG_CONFIG_PATH
 
