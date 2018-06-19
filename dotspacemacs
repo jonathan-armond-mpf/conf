@@ -475,7 +475,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (setq-default ispell-program-name "aspell")
+  (setq-default ispell-program-name "/usr/local/bin/aspell")
   )
 
 (defun dotspacemacs/user-load ()
@@ -511,8 +511,9 @@ before packages are loaded."
     )
   (my-setup-indent 2)
 
-  (ess-smart-S-assign-key nil) ; Disable underscore inserting <-
-  (setq ess-default-style 'RStudio)
+  (setq ess-sma-rt-S-assign-key nil) ; Disable underscore inserting <-
+  (add-hook 'ess-mode-hook
+            (lambda () (ess-set-style 'RStudio 'quiet)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
